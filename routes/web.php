@@ -19,4 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('change-password', [App\Http\Controllers\Auth\ChangePasswordController::class,'index']);
+Route::post('change-password', [App\Http\Controllers\Auth\ChangePasswordController::class,'store'])->name('change.password');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
