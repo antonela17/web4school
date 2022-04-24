@@ -13,10 +13,16 @@ class UserService
         return User::create([
             'name' => $request->input('name'),
             'surname' => $request->input('surname'),
+            'username' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'role_id'=> $request->input('role'),
             'class_id'=>null,
         ]);
+    }
+
+    public static function deleteData(Request $request)
+    {
+        User::query()->where("username",$request->input('username'))->delete();
     }
 }
