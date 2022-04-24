@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
+use mysqli;
 
 class UserController extends Controller
 {
@@ -40,17 +42,20 @@ class UserController extends Controller
 
     public function read()
     {
-        $conn=mysqli_connect("localhost","root","") or die("Could not establish connection");
-        mysqli_select_db("users") or die ("Database not found");
-        $query="Select * From Users;";
-        $result=mysqli_query($conn,$result);
-        while($row=mysqli_fetch_array($result,MYSQL_ASSOC())){
-            return 
+        //dd(User::query()->get('name')->toArray());
+        $conn= new  mysqli("localhost","root","anto2001","web4school",3306) or die("Could not establish connection");
+        $query='SELECT * FROM users;';
+        $result=mysqli_query($conn,$query);
+
+        $data  = [];
+        while($row=mysqli_fetch_array($result)){
+            $data[] = $row;
         }
-       
 
         mysqli_close($conn);
-        
+
+        return view('createTable')->with(compact('data'));
+
 
 
     }
@@ -74,19 +79,19 @@ class UserController extends Controller
             ],
             'role_id' => 'required',
         ]);
-        $user->name=$request->name;
-        $user->surname=$request->surname;
-        $user->username=$request->username;
-        $user->email=$request->email;
-        $user->password=$request->password;
-        $user->role_id=$request->role_id;
+        $user->name=$request->input('name');
+        $user->surname=$request->input('surname');
+        $user->username=$request->input('username');
+        $user->email=$request->input('email');
+        $user->password=$request->input('password');
+        $user->role_id=$request->input('role_id');
 
-        if($blog->save()){
-            return redirect('')->with('success','User Updated')
+        if($user->save()){
+            return redirect('')->with('success','User Updated');
         }else{
-            //handle error
+            return redirect('')->with('error','User not Updated');
         }
-            
+
 
     }
 
