@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controller\User1Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route:: resourse('users',User1Controller::class);
 
 Auth::routes();
 

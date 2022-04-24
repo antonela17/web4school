@@ -40,11 +40,53 @@ class UserController extends Controller
 
     public function read()
     {
+        $conn=mysqli_connect("localhost","root","") or die("Could not establish connection");
+        mysqli_select_db("users") or die ("Database not found");
+        $query="Select * From Users;";
+        $result=mysqli_query($conn,$result);
+        while($row=mysqli_fetch_array($result,MYSQL_ASSOC())){
+            return 
+        }
+       
+
+        mysqli_close($conn);
+        
+
 
     }
 
-    public function update()
+    public function update(Request $request, User $user)
     {
+        $request -> validate([
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'username'=>'required|max:25|unique:users',
+            'email' => 'required|email|max:255',
+            'password' => [
+                'required',
+                'string',
+                Password::min(8)
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised(),
+                'confirmed'
+            ],
+            'role_id' => 'required',
+        ]);
+        $user->name=$request->name;
+        $user->surname=$request->surname;
+        $user->username=$request->username;
+        $user->email=$request->email;
+        $user->password=$request->password;
+        $user->role_id=$request->role_id;
+
+        if($blog->save()){
+            return redirect('')->with('success','User Updated')
+        }else{
+            //handle error
+        }
+            
 
     }
 
@@ -60,4 +102,5 @@ class UserController extends Controller
         }
 
     }
+
 }
