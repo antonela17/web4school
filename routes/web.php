@@ -30,3 +30,4 @@ Route::get('/test/',function (){
     return view('createTable');
 });
 Route::get('read',[\App\Http\Controllers\UserController::class,'read']);
+Route::get('edit',[\App\Http\Controllers\UserController::class,'update']);
