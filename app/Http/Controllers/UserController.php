@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         //dd(User::query()->get('name')->toArray());
         $conn= new  mysqli("localhost","root","anto2001","web4school",3306) or die("Could not establish connection");
-        $query='SELECT * FROM users;';
+        $query='SELECT username,surname,role_id,name,email FROM users;';
         $result=mysqli_query($conn,$query);
 
         $data  = [];
@@ -59,40 +59,36 @@ class UserController extends Controller
 
 
     }
+    public function editUser(Request $request){
 
-    public function update(Request $request, User $user)
+        $name=$request->input('name');
+        $surname=$request->input('surname');
+        $email=$request->input('email');
+        $username=$request->input('username');
+        $role=$request->input('role');
+        return view('editTable')->with(compact(['name','username','email','surname','role']));
+    }
+
+    public function update(Request $request/*, User $user*/)
     {
-        dd($request->input());
         $request -> validate([
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'username'=>'required|max:25|unique:users',
             'email' => 'required|email|max:255',
-            'password' => [
-                'required',
-                'string',
-                Password::min(8)
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
-                    ->uncompromised(),
-                'confirmed'
-            ],
             'role_id' => 'required',
         ]);
-        $user->name=$request->input('name');
-        $user->surname=$request->input('surname');
-        $user->username=$request->input('username');
-        $user->email=$request->input('email');
-        $user->password=$request->input('password');
-        $user->role_id=$request->input('role_id');
+//        $user->name=$request->input('name');
+//        $user->surname=$request->input('surname');
+//        $user->email=$request->input('email');
+//        $user->password=$request->input('password');
+//        $user->role_id=$request->input('role_id');
 
-        if($user->save()){
-            return redirect('')->with('success','User Updated');
-        }else{
-            return redirect('')->with('error','User not Updated');
-        }
-
+//        if($user->save()){
+//            return redirect()->back()->with('success','User Updated');
+//        }else{
+//            return redirect()->back()->with('error','User not Updated');
+//        }
+        return redirect()->back()->with('success','User Updated');
 
     }
 
