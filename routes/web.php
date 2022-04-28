@@ -31,5 +31,5 @@ Route::get('/test/',function (){
 });
 Route::get('read',[\App\Http\Controllers\UserController::class,'read']);
 Route::get('edit',[\App\Http\Controllers\UserController::class,'editUser']);
-Route::post('edit',[\App\Http\Controllers\UserController::class,'update'])->name('edit');
+Route::post('/edit',[\App\Http\Controllers\UserController::class,'update'])->name('edit');
 Route::post('/delete',[\App\Http\Controllers\UserController::class,'delete']);

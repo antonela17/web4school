@@ -34,13 +34,12 @@
                                     <input class="form-control" id="name" type="text" pattern="([A-Z])[a-z]+"
                                            title="Name must start with only one uppercase" minlength="4" maxlength="50"
                                            name="name"
-                                           value="{{ old('name') }}"  placeholder="{{$name}}" required>
+                                           value="{{ old('name') }}" placeholder="{{$name}}" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="surname"
                                        class="col-md-4 col-form-label text-md-end">{{ __('Surname') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="surname" type="text"
                                            class="form-control @error('surname') is-invalid @enderror" name="surname"
@@ -50,6 +49,10 @@
 
                                 </div>
                             </div>
+
+                                    <input id="surname" type="hidden"
+                                           class="form-control" name="username"
+                                           value="{{ $username}}">
                             <div class="row mb-3">
                                 <label for="email" id="email"
                                        class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
@@ -57,13 +60,14 @@
                                 <div class="col-md-6">
                                     <input type="text" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address"
                                            name="email"
-                                           class="form-control" value="{{ old('email') }}"  placeholder="{{$email}}" required>
+                                           class="form-control" value="{{ old('email') }}" placeholder="{{$email}}"
+                                           required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-md-4 col-form-label text-md-end" for="role">Role(choose):</label>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="role" id="role">
+                                    <select class="form-control" name="role_id" id="role">
                                         <option value="" selected disabled> Plase select :</option>
                                         <option value="1">Admin</option>
                                         <option value="2">Mesues</option>
@@ -88,21 +92,29 @@
 @endsection
 <script type="text/javascript">
 
-$.ajaxSetup({
-	        headers: {
-	            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-	        }
-	    });
 
-        // $('.myForm').editable({
-	    //     url: "{{ route('product.update') }}",
-	    //     type: 'text',
-	    //     pk: 1,
-	    //     name: 'name',
-	    //     title: 'Enter name'
-	    // });
+    function editUser(username) {
+        var name = document.getElementById('name').value;
+        var surname = document.getElementById('surname').value;
+        var email = document.getElementsByName('email')[0].value;
+        var role = document.getElementById('role').value;
+        objectData = {"name": name, "surname": surname, "username": username, "email": email, "role": role};
+        console.log(objectData)
 
+        $.ajax(
+            {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('edit') }}",
+                type: "POST",
+                data: objectData,
+                error: function () {
+                    alert("Error!!!");
+                }
+            })
+    }
 
 </script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

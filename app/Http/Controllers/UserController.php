@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Password;
 use mysqli;
+use SebastianBergmann\Environment\Console;
 
 class UserController extends Controller
 {
@@ -75,34 +77,22 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'role_id' => 'required',
-        ]);
-    //    $user->name=$request->input('name');
-    //    $user->surname=$request->input('surname');
-    //    $user->email=$request->input('email');
-    //    $user->password=$request->input('password');
-    //    $user->role_id=$request->input('role_id');
+            'role_id'=>'required'
 
+        ]);
 
        $name=$request->input('name');
        $surname=$request->input('surname');
        $email=$request->input('email');
-       $password=$request->input('password');
        $role_id=$request->input('role_id');
-       $user =User::findOrFail($role_id);
-       $user->{$name};
-       $user->{$surname};
-       $user->{$email};
-       $user->{$password};
-       $user->{$role_id};
-       $user->save();
-       
+       $username =$request->input('username');
 
+        try {
+            User::query()->where("username", $username)->update(['name'=>$name,'surname'=>$surname,'email'=>$email,'role_id'=>$role_id]);
 
+            return redirect()->back()->with('success', 'User Updated'.$username);
+        }catch (\Exception $e){
 
-       if($user->save()){
-           return redirect()->back()->with('success','User Updated');
-       }else{
            return redirect()->back()->with('error','User not Updated');
        }
         // return redirect()->back()->with('success','User Updated');
@@ -111,10 +101,13 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+        $username=$request->username;
         try {
-            UserService::deleteData($request);
-            return redirect()->back()->with('success', 'Your database element was deleted successfully!');
+            UserService::deleteData($username);
+            return redirect()->route('login');;
+            file_put_contents("C:\Users\Ela\Desktop\test\webProve","Success");
         } catch (\Exception $e) {
+            file_put_contents("C:\Users\Ela\Desktop\test\webProve","Error");
             return redirect()->back()
                 ->withInput($request->input())
                 ->with('error', 'An error occurred while processing your data. Please try again later!');

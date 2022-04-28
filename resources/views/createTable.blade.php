@@ -7,6 +7,24 @@
 </head>
 <body>
 <div id="wrapper">
+    <div class="card-body">
+        @if(session()->has('success'))
+            <div style="color: green;" class="text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session()->has('error'))
+            <div style="color: red;" class="text-center">
+                {{ session('error') }}
+
+            </div>
+        @endif
+        @foreach($errors->all() as $error)
+            <div style="color: red;" class="text-center">
+                {{ $error }}
+            </div>
+        @endforeach
+    </div>
     <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
         <tr>
             <th>Name</th>
@@ -73,10 +91,7 @@
             url: "/delete",
             type: "post",
             data: objectData,
-            success:function(){
-                alert("The URL list has been updated successfully");
-                console.log('Hooray, it worked!');
-            },error:function(){
+             error:function(){
                 alert("Error!!!");
             }
         })

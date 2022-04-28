@@ -20,10 +20,10 @@ class UserService
             'class_id'=>null,
         ]);
     }
-    
 
-    public static function deleteData(Request $request)
+
+    public static function deleteData($username)
     {
-        User::query()->where("username",$request->input('username'))->delete();
+        User::query()->where("username",$username)->delete();
     }
 }
