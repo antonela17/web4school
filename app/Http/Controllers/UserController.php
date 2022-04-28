@@ -77,18 +77,35 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
             'role_id' => 'required',
         ]);
-//        $user->name=$request->input('name');
-//        $user->surname=$request->input('surname');
-//        $user->email=$request->input('email');
-//        $user->password=$request->input('password');
-//        $user->role_id=$request->input('role_id');
+    //    $user->name=$request->input('name');
+    //    $user->surname=$request->input('surname');
+    //    $user->email=$request->input('email');
+    //    $user->password=$request->input('password');
+    //    $user->role_id=$request->input('role_id');
 
-//        if($user->save()){
-//            return redirect()->back()->with('success','User Updated');
-//        }else{
-//            return redirect()->back()->with('error','User not Updated');
-//        }
-        return redirect()->back()->with('success','User Updated');
+
+       $name=$request->input('name');
+       $surname=$request->input('surname');
+       $email=$request->input('email');
+       $password=$request->input('password');
+       $role_id=$request->input('role_id');
+       $user =User::findOrFail($role_id);
+       $user->{$name};
+       $user->{$surname};
+       $user->{$email};
+       $user->{$password};
+       $user->{$role_id};
+       $user->save();
+       
+
+
+
+       if($user->save()){
+           return redirect()->back()->with('success','User Updated');
+       }else{
+           return redirect()->back()->with('error','User not Updated');
+       }
+        // return redirect()->back()->with('success','User Updated');
 
     }
 

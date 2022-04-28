@@ -86,7 +86,23 @@
         </div>
     </div>
 @endsection
-<script>
+<script type="text/javascript">
+
+$.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+	        }
+	    });
+
+        // $('.myForm').editable({
+	    //     url: "{{ route('product.update') }}",
+	    //     type: 'text',
+	    //     pk: 1,
+	    //     name: 'name',
+	    //     title: 'Enter name'
+	    // });
+
 
 </script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
