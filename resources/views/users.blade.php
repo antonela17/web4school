@@ -24,7 +24,9 @@
                 {{ $error }}
             </div>
         @endforeach
-    </div>
+            <a href="/create-user">
+                <button>Create New User</button>
+            </a>
     <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
         <tr>
             <th>Name</th>
@@ -50,12 +52,19 @@
                 <td>
                     <input type="button" id="edit_button{{ $loop->index + 1 }}" value="Edit" class="edit"
                            onclick="edit_row({{$loop->index + 1}})">
-                    <input type="button" value="Delete" class="delete" onclick="delete_row('{{$loop->index + 1}}')">
+<button formaction="/delete" formmethod="POST" onclick="delete_row('{{$loop->index + 1}}')">
+    @csrf
+    Delete
+</button>
+{{--                    <input formaction="/delete" formmethod="POST" type="button" value="Delete" class="delete" onclick="delete_row('{{$loop->index + 1}}')">--}}
+
+
                 </td>
             </tr>
         @endforeach
 
     </table>
+    </div>
 </div>
 
 </body>

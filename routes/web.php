@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controller\User1Controller;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test/',function (){
     return view('createTable');
 });
-Route::get('read',[\App\Http\Controllers\UserController::class,'read']);
-Route::get('edit',[\App\Http\Controllers\UserController::class,'editUser']);
-Route::post('/edit',[\App\Http\Controllers\UserController::class,'update'])->name('edit');
-Route::post('/delete',[\App\Http\Controllers\UserController::class,'delete']);
+Route::get('read',[UserController::class,'read']);
+Route::get('create-user',[UserController::class,'createUserView']);
+Route::post('create',[UserController::class,'create'])->name('create');
+Route::get('edit',[UserController::class,'editUser']);
+Route::post('/edit',[UserController::class,'update'])->name('edit');
+Route::post('/delete',[UserController::class,'delete'])->name('delete');

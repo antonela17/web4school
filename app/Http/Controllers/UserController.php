@@ -13,6 +13,10 @@ use SebastianBergmann\Environment\Console;
 class UserController extends Controller
 {
     //
+    public function createUserView(){
+
+        return view('createUser');
+    }
     public function create(Request $request)
     {
         $request->validate([
@@ -27,8 +31,7 @@ class UserController extends Controller
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
-                    ->uncompromised(),
-                'confirmed'
+                    ->uncompromised()
             ],
             'role_id' => 'required',
         ]);
@@ -56,7 +59,7 @@ class UserController extends Controller
 
         mysqli_close($conn);
 
-        return view('createTable')->with(compact('data'));
+        return view('users')->with(compact('data'));
 
 
 
@@ -104,8 +107,7 @@ class UserController extends Controller
         $username=$request->username;
         try {
             UserService::deleteData($username);
-            return redirect()->route('login');;
-            file_put_contents("C:\Users\Ela\Desktop\test\webProve","Success");
+            return redirect()->back()->with('success','Data deleted!');
         } catch (\Exception $e) {
             file_put_contents("C:\Users\Ela\Desktop\test\webProve","Error");
             return redirect()->back()
