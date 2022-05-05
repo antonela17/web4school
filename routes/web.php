@@ -30,9 +30,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test/',function (){
     return view('createTable');
 });
-Route::get('read',[UserController::class,'read']);
+Route::get('read',[UserController::class,'read'])->name('read');
 Route::get('create-user',[UserController::class,'createUserView']);
 Route::post('create',[UserController::class,'create'])->name('create');
-Route::get('edit',[UserController::class,'editUser']);
+Route::get('edit',[UserController::class,'editUser'])->name('prove');
 Route::post('/edit',[UserController::class,'update'])->name('edit');
 Route::post('/delete',[UserController::class,'delete'])->name('delete');

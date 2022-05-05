@@ -13,16 +13,18 @@ use SebastianBergmann\Environment\Console;
 class UserController extends Controller
 {
     //
-    public function createUserView(){
+    public function createUserView()
+    {
 
         return view('createUser');
     }
+
     public function create(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
-            'username'=>'required|max:25|unique:users',
+            'username' => 'required|max:25|unique:users',
             'email' => 'required|email|max:255',
             'password' => [
                 'required',
@@ -31,13 +33,14 @@ class UserController extends Controller
                     ->mixedCase()
                     ->numbers()
                     ->symbols()
-                    ->uncompromised()
+                    ->uncompromised(),
+                "confirmed"
             ],
             'role_id' => 'required',
         ]);
         try {
-            $newUser = UserService::createData($request);
-            return redirect()->back()->with('success', 'Your database was uploaded successfully!');
+            UserService::createData($request);
+            return redirect()->route('read')->with('success', 'Your database was uploaded successfully!');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput($request->input())
@@ -48,12 +51,12 @@ class UserController extends Controller
     public function read()
     {
         //dd(User::query()->get('name')->toArray());
-        $conn= new  mysqli("localhost","root","anto2001","web4school",3306) or die("Could not establish connection");
-        $query='SELECT username,surname,role_id,name,email FROM users;';
-        $result=mysqli_query($conn,$query);
+        $conn = new  mysqli("localhost", "root", "anto2001", "web4school", 3306) or die("Could not establish connection");
+        $query = 'SELECT username,surname,role_id,name,email FROM users;';
+        $result = mysqli_query($conn, $query);
 
-        $data  = [];
-        while($row=mysqli_fetch_array($result)){
+        $data = [];
+        while ($row = mysqli_fetch_array($result)) {
             $data[] = $row;
         }
 
@@ -62,57 +65,56 @@ class UserController extends Controller
         return view('users')->with(compact('data'));
 
 
-
     }
-    public function editUser(Request $request){
 
-        $name=$request->input('name');
-        $surname=$request->input('surname');
-        $email=$request->input('email');
-        $username=$request->input('username');
-        $role=$request->input('role');
-        return view('editTable')->with(compact(['name','username','email','surname','role']));
+    public function editUser(Request $request)
+    {
+
+        $name = $request->input('name');
+        $surname = $request->input('surname');
+        $email = $request->input('email');
+        $username = $request->input('username');
+        $role = $request->input('role');
+        return view('editTable')->with(compact(['name', 'username', 'email', 'surname', 'role']));
     }
 
     public function update(Request $request/*, User $user*/)
     {
-        $request -> validate([
+        $request->validate([
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255',
-            'role_id'=>'required'
+            'role_id' => 'required',
+            'username'=>'required'
 
         ]);
 
-       $name=$request->input('name');
-       $surname=$request->input('surname');
-       $email=$request->input('email');
-       $role_id=$request->input('role_id');
-       $username =$request->input('username');
+        $name = $request->input('name');
+        $surname = $request->input('surname');
+        $email = $request->input('email');
+        $role_id = $request->input('role_id');
+        $username = $request->input('username');
 
         try {
-            User::query()->where("username", $username)->update(['name'=>$name,'surname'=>$surname,'email'=>$email,'role_id'=>$role_id]);
+            User::query()->where("username", $username)->update(['name' => $name, 'surname' => $surname, 'email' => $email, 'role_id' => $role_id]);
 
-            return redirect()->back()->with('success', 'User Updated'.$username);
-        }catch (\Exception $e){
+            return redirect()->route('read')->with('success', 'User Updated Successfully!' );
+        } catch (\Exception $e) {
 
-           return redirect()->back()->with('error','User not Updated');
-       }
+            return redirect()->back()->with('error', 'User not Updated. Please try again!');
+        }
         // return redirect()->back()->with('success','User Updated');
 
     }
 
     public function delete(Request $request)
     {
-        $username=$request->username;
+        $username = $request->username;
         try {
             UserService::deleteData($username);
-            return redirect()->back()->with('success','Data deleted!');
+            return redirect()->route('read')->with('success', 'Data deleted!');
         } catch (\Exception $e) {
-            file_put_contents("C:\Users\Ela\Desktop\test\webProve","Error");
-            return redirect()->back()
-                ->withInput($request->input())
-                ->with('error', 'An error occurred while processing your data. Please try again later!');
+            return redirect()->back()->with('error', 'An error occurred while processing your data. Please try again later!');
         }
 
     }

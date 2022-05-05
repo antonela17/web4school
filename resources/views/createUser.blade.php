@@ -32,9 +32,10 @@
 
                                 <div class="col-md-6">
                                     <input class="form-control" id="name" type="text" pattern="([A-Z])[a-z]+"
-                                           title="Name must start with only one uppercase and shouldn't contain numbers" minlength="4" maxlength="50"
+                                           title="Name must start with only one uppercase and shouldn't contain numbers"
+                                           minlength="4" maxlength="50"
                                            name="name"
-                                           value="{{ old('name') }}"  required>
+                                           value="{{ old('name') }}" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -54,7 +55,8 @@
                                        class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" pattern="[A-Za-z][A-Za-z0-9_]{7,29}$" title="Username must contain only letters or numbers"
+                                    <input type="text" pattern="^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$"
+                                           title="Username must contain only letters or numbers"
                                            name="username"
                                            class="form-control" value="{{ old('username') }}"
                                            required>
@@ -69,8 +71,18 @@
                                            class="form-control" name="password"
                                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
                                            title="Please enter a valid password"
-                                           required ="">
+                                           required="">
 
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="password-confirm"
+                                       class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                           name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
 
@@ -100,7 +112,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Edit') }}
+                                        {{ __('Save') }}
                                     </button>
                                 </div>
                             </div>

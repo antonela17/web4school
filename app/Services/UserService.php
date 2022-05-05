@@ -10,15 +10,16 @@ class UserService
 
     public static function createData(Request $request)
     {
-        return User::create([
-            'name' => $request->input('name'),
-            'surname' => $request->input('surname'),
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'role_id'=> $request->input('role'),
-            'class_id'=>null,
-        ]);
+        $user= new User;
+        $user->name= $request->input('name');
+        $user->surname = $request->input('surname');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->role_id = $request->input("role_id");
+
+        $user->save();
+
     }
 
 
