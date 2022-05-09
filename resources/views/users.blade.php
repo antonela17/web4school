@@ -42,7 +42,7 @@
                 @endif
                 <td>
                     <input type="button" id="edit_button{{ $loop->index + 1 }}" value="Edit" class="edit"
-                           onclick="edit_row({{$loop->index + 1}})">
+                           onclick="edit_row('{{$loop->index + 1}}')">
                 </td>
                 <td>
                     <form class="container" action="{{route('delete')}}" method="post">
