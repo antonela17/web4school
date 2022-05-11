@@ -30,9 +30,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test/',function (){
     return view('createTable');
 });
-Route::get('read',[UserController::class,'read'])->name('read');
-Route::get('create-user',[UserController::class,'createUserView']);
-Route::post('create',[UserController::class,'create'])->name('create');
-Route::get('edit',[UserController::class,'editUser'])->name('prove');
-Route::post('/edit',[UserController::class,'update'])->name('edit');
-Route::post('/delete',[UserController::class,'delete'])->name('delete');
+Route::get('read',[UserController::class,'read'])->name('read')->middleware('admin_only');
+Route::get('create-user',[UserController::class,'createUserView'])->middleware('admin_only');
+Route::post('create',[UserController::class,'create'])->middleware('admin_only')->name('create');
+Route::get('edit',[UserController::class,'editUser'])->middleware('admin_only')->name('prove');
+Route::post('/edit',[UserController::class,'update'])->middleware('admin_only')->name('edit');
+Route::post('/delete',[UserController::class,'delete'])->middleware('admin_only')->name('delete');

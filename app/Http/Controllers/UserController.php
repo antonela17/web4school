@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Password;
 use mysqli;
@@ -50,7 +51,7 @@ class UserController extends Controller
 
     public function read()
     {
-        //dd(User::query()->get('name')->toArray());
+
         $conn = new  mysqli("localhost", "root", "anto2001", "web4school", 3306) or die("Could not establish connection");
         $query = 'SELECT username,surname,role_id,name,email FROM users;';
         $result = mysqli_query($conn, $query);
@@ -109,10 +110,11 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
-        $username = $request->username;
+
         try {
+            $username = $request->username;
             UserService::deleteData($username);
-            return redirect()->route('read')->with('success', 'Data deleted!');
+            return redirect()->back()->with('success', 'Data deleted!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while processing your data. Please try again later!');
         }
