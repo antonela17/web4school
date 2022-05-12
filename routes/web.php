@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controller\User1Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +27,7 @@ Route::post('change-password', [App\Http\Controllers\Auth\ChangePasswordControll
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/test/',function (){
-    return view('createTable');
+    return view('newChangePassword');
 });
 Route::get('read',[UserController::class,'read'])->name('read');
 Route::get('create-user',[UserController::class,'createUserView']);
