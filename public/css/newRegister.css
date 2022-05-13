@@ -9,15 +9,10 @@
     user-select: none;
 }
 
-html {
-overflow: hidden;
-}
-
 body {
     margin: 0;
     line-height: 1.15;
     background-color: #1D1D21;
-    overflow: hidden;
 }
 
 .register{
