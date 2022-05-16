@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LogIn</title>
-  <link rel="stylesheet" href="../css/newLogin.css">
+    <link href="{{ asset('css/newLogin.css') }}" rel="stylesheet">
 </head>
 <body>
 <div class="login">

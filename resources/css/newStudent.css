@@ -1,5 +1,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
 }
 .navbar {
   width: 100%;
@@ -13,7 +15,7 @@ body {
   height: 50px;
  float: left;
  z-index: 11;
-  margin-top: 15px;    
+  margin-top: 15px;    /* if you want it vertically middle of the navbar. */
 }
 .navbar > a {
   display: inline-block;
@@ -23,8 +25,8 @@ body {
   color: white;
   text-decoration: none;
   font-size: 17px;
-  height: 60px;   
-  line-height: 60px;  
+  height: 60px;        /* if you want it to take the full height of the bar */
+  line-height: 60px;    /* if you want it vertically middle of the navbar */
 }
 
 .navbar a span{
@@ -44,18 +46,42 @@ body {
   float: left;
   margin-top: -17px;
 } 
+/* 
 
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: rgba(0, 0, 0, 0.607);
+}
+
+.active {
+  background-color: #031275;
+}
+
+.navbar img{
+  width: 10%;
+  float: left;
+  margin-top: -32px;
+} */
 /* first */
-.first{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 28px;
+.first {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 54px - 84px);
 }
 
 .first .left{
     width: 30%;
+    padding: 30px 15px;
 }
 
 .first .right{
@@ -104,7 +130,13 @@ body {
 
   .first .right{
     width: 70%;
-}
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 15px;
+    background-color: #a29b8cb0;
+  }
 
 .right h1{
   font-size: 32px;
