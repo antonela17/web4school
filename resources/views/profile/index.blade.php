@@ -7,11 +7,11 @@
                 <h2 class="text-gray-700 uppercase font-bold">Profile</h2>
             </div>
             <div class="flex flex-wrap items-center">
-                <a href="{{--{{ route('profile.edit') }}--}}" class="bg-gray-200 text-gray-700 text-sm uppercase py-2 px-4 flex items-center rounded">
+                <a href="{{ route('profile.edit') }}" class="bg-gray-200 text-gray-700 text-sm uppercase py-2 px-4 flex items-center rounded">
                     <svg class="w-3 h-3 fill-current" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
                     <span class="ml-2 text-xs font-semibold">Edit Profile</span>
                 </a>
-                <a href="{{--{{ route('profile.change.password') }}--}}" class="bg-gray-200 text-gray-700 text-sm uppercase ml-2 py-2 px-4 flex items-center rounded">
+                <a href="{{ route('profile.changepassword') }}" class="bg-gray-200 text-gray-700 text-sm uppercase ml-2 py-2 px-4 flex items-center rounded">
                     <svg class="w-3 h-3 fill-current" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus" class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
                     <span class="ml-2 text-xs font-semibold">Change Password</span>
                 </a>
@@ -53,10 +53,18 @@
                 </div>
                 <div>
                     <div>
-                        <img class="w-20 h-20 sm:w-32 sm:h-32 rounded" src="{{ asset('img/avatar.png')  }}" alt="avatar">
+                        <img class="w-20 h-20 sm:w-32 sm:h-32 rounded" src="{{ asset('img/profile/avatar.png')  }}" alt="avatar">
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
+    @if(session()->has('success'))
+    <div class="md:flex md:items-center mb-4" style="justify-content: center"> <p class="text-green-500 text-xs italic">
+            {{ session('success') }}
+        </p></div>
+    @endif
+
 @endsection

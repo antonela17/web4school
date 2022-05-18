@@ -35,6 +35,15 @@ Route::get('profile',function (){
     return view('profile.index');
 })->name('profile');
 
+Route::get('profile/edit',function (){
+    return view('profile.edit');
+})->name('profile.edit');
+Route::post('profile/update',[\App\Http\Controllers\HomeController::class,'profileUpdate'])->name('profile.update');
+
+Route::get('profile/changepassword',function (){
+    return view('profile.changepassword');
+})->name('profile.changepassword');
+
 Route::get('read',[UserController::class,'read'])->name('read')->middleware('admin_only');
 Route::get('create-user',[UserController::class,'createUserView'])->middleware('admin_only');
 Route::post('create',[UserController::class,'create'])->middleware('admin_only')->name('create');
