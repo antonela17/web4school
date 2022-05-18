@@ -30,6 +30,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test/',function (){
     return view('createTable');
 });
+
+Route::get('profile',function (){
+    return view('profile.index');
+})->name('profile');
+
 Route::get('read',[UserController::class,'read'])->name('read')->middleware('admin_only');
 Route::get('create-user',[UserController::class,'createUserView'])->middleware('admin_only');
 Route::post('create',[UserController::class,'create'])->middleware('admin_only')->name('create');

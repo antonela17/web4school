@@ -9,24 +9,31 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 </head>
 <body class="bg-gray-100 font-sans antialiased">
     <div id="app-2">
 
         @include('layouts.navbar')
-        
+
         <div class="main flex flex-wrap justify-end mt-16">
-            
+
             <div class="content w-full">
                 <div class="container mx-auto p-4 sm:p-6">
 
                     @yield('content')
-                    
+
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(function() {
+            $( "#opennavdropdown" ).on( "click", function() {
+                $( "#navdropdown" ).toggleClass( "hidden" );
+            })
+        })
+    </script>
 </body>
 </html>
