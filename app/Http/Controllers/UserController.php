@@ -120,7 +120,7 @@ class UserController extends Controller
         }
 
     }
-    public function search(Request $reques){
+    public function search(Request $request){
         $search = $request->input('search');
 
    
