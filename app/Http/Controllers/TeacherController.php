@@ -4,29 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Services\UserService;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
-
     public function index(Request $request)
     {
-        if ($request->input('search')) {
-            $search = $request->input('search');
-            $students = User::query()
-                ->where('role_id',3)
-                ->where([['name', 'LIKE', '%'. $search . '%']])
-                ->paginate(10);
-        }
-        else {
-            $students = UserService::getStudents()->paginate(10);
-        }
+         if ($request->input('search')) {
+             $search = $request->input('search');
+             $teachers = User::query()
+                 ->where('role_id',2)
+                 ->where([['name', 'LIKE', '%'. $search . '%']])
+                 ->paginate(10);
+         }
+         else{
+        $teachers = UserService::getTeacher()->paginate(10);}
 
-        return view('backend.students.index', compact('students'));
+        return view('backend.teachers.index', compact('teachers'));
     }
+
+
+    public function create()
+    {
+        return view('backend.teachers.create');
+    }
+
 
     public function store(Request $request)
     {
@@ -34,15 +39,6 @@ class StudentController extends Controller
             'name'              => 'required|string|max:255',
             'email'             => 'required|string|email|max:255|unique:users',
             'password'          => 'required|string|min:8',
-            'parent_id'         => 'required|numeric',
-            'class_id'          => 'required|numeric',
-            'roll_number'       => [
-                'required',
-                'numeric',
-                Rule::unique('students')->where(function ($query) use ($request) {
-                    return $query->where('class_id', $request->class_id);
-                })
-            ],
             'gender'            => 'required|string',
             'phone'             => 'required|string|max:255',
             'dateofbirth'       => 'required|date',
@@ -51,9 +47,9 @@ class StudentController extends Controller
         ]);
 
         $user = User::create([
-            'name'              => $request->name,
-            'email'             => $request->email,
-            'password'          => Hash::make($request->password)
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => Hash::make($request->password)
         ]);
 
         if ($request->hasFile('profile_picture')) {
@@ -66,10 +62,7 @@ class StudentController extends Controller
             'profile_picture' => $profile
         ]);
 
-        $user->student()->create([
-            'parent_id'         => $request->parent_id,
-            'class_id'          => $request->class_id,
-            'roll_number'       => $request->roll_number,
+        $user->teacher()->create([
             'gender'            => $request->gender,
             'phone'             => $request->phone,
             'dateofbirth'       => $request->dateofbirth,
@@ -77,44 +70,46 @@ class StudentController extends Controller
             'permanent_address' => $request->permanent_address
         ]);
 
-        $user->assignRole('Student');
+        $user->assignRole('Teacher');
 
-        return redirect()->route('student.index');
+        return redirect()->route('teacher.index');
     }
 
 
     public function show($id)
     {
-        $student = UserService::getUser($id);
+        $teacher= UserService::getUser($id);
 
-        return view('backend.students.show', compact('student'));
+        return view('backend.teachers.show', compact('teacher'));
+
     }
 
 
     public function edit($id)
     {
-        $student = UserService::getUser($id);
+        $teacher= UserService::getUser($id);
 
-        return view('backend.students.edit', compact('student'));
+        return view('backend.teachers.edit', compact('teacher'));
     }
 
 
     public function update(Request $request,  $id)
     {
+
         $request->validate([
             'name'              => 'required|string|max:255',
             'email'             => 'required|string|email|max:255|unique:users,email,'.$id,
         ]);
 
-        $student = UserService::getUser($id);
+        $teacher = UserService::getUser($id);
         if ($request->hasFile('profile_picture')) {
-            $profile = Str::slug($student->name).'-'.$student->id.'.'.$request->profile_picture->getClientOriginalExtension();
+            $profile = Str::slug($teacher->name).'-'.$teacher->id.'.'.$request->profile_picture->getClientOriginalExtension();
             $request->profile_picture->move(public_path('img/profile'), $profile);
         } else {
-            $profile = $student->profile_picture;
+            $profile = $teacher->profile_picture;
         }
         try {
-            $student->update([
+            $teacher->update([
                 'name'              => $request->name,
                 'email'             => $request->email,
                 'profile_picture'   => $profile
@@ -123,9 +118,9 @@ class StudentController extends Controller
             return redirect()->back()
                 ->withInput($request->input())
                 ->with('error', 'An error occurred while processing your data. Please try again later!');
-    }
+        }
 
-        return redirect()->route('students.index')->with('success', 'Your database was updated successfully!');
+        return redirect()->route('teachers.index')->with('success', 'Your database was updated successfully!');
     }
 
 

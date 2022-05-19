@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -41,13 +42,12 @@ Route::get('profile',function (){
 Route::get('profile/edit',function (){
     return view('profile.edit');
 })->name('profile.edit');
-Route::post('profile/update',[\App\Http\Controllers\HomeController::class,'profileUpdate'])->name('profile.update');
+Route::post('profile/update',[HomeController::class,'profileUpdate'])->name('profile.update');
 
 Route::get('profile/changepassword',function (){
     return view('profile.changepassword');
 })->name('profile.changepassword');
 
-Route::get('search',[UserController::class,'search'])->name('search');
 
 Route::get('read',[UserController::class,'read'])->name('read')->middleware('admin_only');
 Route::get('create-user',[UserController::class,'createUserView'])->middleware('admin_only');

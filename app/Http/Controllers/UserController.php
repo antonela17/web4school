@@ -86,7 +86,7 @@ class UserController extends Controller
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255',
             'role_id' => 'required',
-            'username'=>'required'
+            'username' => 'required'
 
         ]);
 
@@ -99,7 +99,7 @@ class UserController extends Controller
         try {
             User::query()->where("username", $username)->update(['name' => $name, 'surname' => $surname, 'email' => $email, 'role_id' => $role_id]);
 
-            return redirect()->route('read')->with('success', 'User Updated Successfully!' );
+            return redirect()->route('read')->with('success', 'User Updated Successfully!');
         } catch (\Exception $e) {
 
             return redirect()->back()->with('error', 'User not Updated. Please try again!');
@@ -120,25 +120,5 @@ class UserController extends Controller
         }
 
     }
-        public function search(Request $request)
-        {
-            if($request->ajax())
-            {
-        $search = $request->search;
-        $url =basename($request->url);
-
-
-            $teachers = User::query()
-                ->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('surname', 'LIKE', "%{$search}%")
-                ->get();
-
-if ($url=='teachers')
-   return Response($teachers);
-else
-    dd('aaa');
-
-    }
-            }
 
 }
