@@ -50,3 +50,4 @@ Route::post('create',[UserController::class,'create'])->middleware('admin_only')
 Route::get('edit',[UserController::class,'editUser'])->middleware('admin_only')->name('prove');
 Route::post('/edit',[UserController::class,'update'])->middleware('admin_only')->name('edit');
 Route::post('/delete',[UserController::class,'delete'])->middleware('admin_only')->name('delete');
+Route::get('/search',[UserController::class,'search'])->name('search');
