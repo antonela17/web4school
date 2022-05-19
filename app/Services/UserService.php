@@ -27,4 +27,10 @@ class UserService
     {
         User::query()->where("username",$username)->delete();
     }
+    public static function getStudents(){
+        return User::query()->where("role_id",3);
+    }
+    public static function getUser($id){
+        return User::query()->where('id',$id)->firstOrFail();
+}
 }
