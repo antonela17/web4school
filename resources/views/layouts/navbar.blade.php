@@ -13,10 +13,6 @@
             <div class="bg-blue-700 absolute top-0 right-0 mt-12 -mr-6 shadow rounded-bl rounded-br">
                 <div class="hidden h-24 w-48" id="navdropdown">
                     <div class="px-8 py-4 border-t border-blue-800">
-                    <form action="{{ route('search') }}" method="GET">
-                            <input type="text" name="search" required/>
-                            <button type="submit">Search</button>
-                     </form>
                      <a href="{{ route('profile') }}" class="flex items-center pb-3 text-sm text-gray-200 font-semibold">
                             <svg class="h-4 w-4 mr-2 fill-current text-gray-200" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt" class="svg-inline--fa fa-user-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path></svg>
                             <span>Profile</span>

@@ -120,18 +120,25 @@ class UserController extends Controller
         }
 
     }
-    public function search(Request $request){
-        $search = $request->input('search');
+        public function search(Request $request)
+        {
+            if($request->ajax())
+            {
+        $search = $request->search;
+        $url =basename($request->url);
 
-   
-            $posts = Post::query()
-                ->where('title', 'LIKE', "%{$search}%")
-                ->orWhere('body', 'LIKE', "%{$search}%")
+
+            $teachers = User::query()
+                ->where('name', 'LIKE', "%{$search}%")
+                ->orWhere('surname', 'LIKE', "%{$search}%")
                 ->get();
 
-    
-         return view('search', compact('posts'));
+if ($url=='teachers')
+   return Response($teachers);
+else
+    dd('aaa');
 
     }
+            }
 
 }

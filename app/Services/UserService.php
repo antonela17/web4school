@@ -30,6 +30,9 @@ class UserService
     public static function getStudents(){
         return User::query()->where("role_id",3);
     }
+    public static function getTeacher(){
+        return User::query()->where("role_id",2);
+    }
     public static function getUser($id){
         return User::query()->where('id',$id)->firstOrFail();
 }

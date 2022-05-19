@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::get('/test/',function (){
     return view('');
 });
 Route::resource('students',StudentController::class);
+Route::resource('teachers',TeacherController::class);
 
 Route::get('profile',function (){
     return view('profile.index');
@@ -45,10 +47,11 @@ Route::get('profile/changepassword',function (){
     return view('profile.changepassword');
 })->name('profile.changepassword');
 
+Route::get('search',[UserController::class,'search'])->name('search');
+
 Route::get('read',[UserController::class,'read'])->name('read')->middleware('admin_only');
 Route::get('create-user',[UserController::class,'createUserView'])->middleware('admin_only');
 Route::post('create',[UserController::class,'create'])->middleware('admin_only')->name('create');
 Route::get('edit',[UserController::class,'editUser'])->middleware('admin_only')->name('prove');
 Route::post('/edit',[UserController::class,'update'])->middleware('admin_only')->name('edit');
 Route::post('/delete',[UserController::class,'delete'])->middleware('admin_only')->name('delete');
-Route::get('/search',[UserController::class,'search'])->name('search');
