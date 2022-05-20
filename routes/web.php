@@ -6,6 +6,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-//Route:: resourse('users',User1Controller::class);
 
 Auth::routes();
 
@@ -29,9 +29,6 @@ Route::get('change-password', [App\Http\Controllers\Auth\ChangePasswordControlle
 Route::post('change-password', [App\Http\Controllers\Auth\ChangePasswordController::class,'store'])->name('change.password');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/test/',function (){
-    return view('');
-});
 Route::resource('students',StudentController::class);
 Route::resource('teachers',TeacherController::class);
 
