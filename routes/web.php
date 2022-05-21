@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
@@ -52,3 +53,8 @@ Route::post('create',[UserController::class,'create'])->middleware('admin_only')
 Route::get('edit',[UserController::class,'editUser'])->middleware('admin_only')->name('prove');
 Route::post('/edit',[UserController::class,'update'])->middleware('admin_only')->name('edit');
 Route::post('/delete',[UserController::class,'delete'])->middleware('admin_only')->name('delete');
+Route::get("/test",function (){
+    return view("contact.contact");
+});
+Route::get('/contact',[ContactController::class,'create']);
+Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
