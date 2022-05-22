@@ -135,6 +135,7 @@ class StudentController extends Controller
         if (!file_exists($filename) || !is_readable($filename))
             return false;
 
+
         $header = null;
         $data = array();
         if (($handle = fopen($filename, 'r')) !== false) {

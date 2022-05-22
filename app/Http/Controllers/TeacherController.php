@@ -35,44 +35,38 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
+        // Validate request
         $request->validate([
-            'name'              => 'required|string|max:255',
-            'email'             => 'required|string|email|max:255|unique:users',
-            'password'          => 'required|string|min:8',
-            'gender'            => 'required|string',
-            'phone'             => 'required|string|max:255',
-            'dateofbirth'       => 'required|date',
-            'current_address'   => 'required|string|max:255',
-            'permanent_address' => 'required|string|max:255'
+            'csv_file' => 'required|mimes:csv,txt',
         ]);
 
-        $user = User::create([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password)
-        ]);
+        if ($request->hasFile('csv_file') and $request->csv_file->getClientOriginalExtension()=="csv") {
 
-        if ($request->hasFile('profile_picture')) {
-            $profile = Str::slug($user->name).'-'.$user->id.'.'.$request->profile_picture->getClientOriginalExtension();
-            $request->profile_picture->move(public_path('images/profile'), $profile);
+            $request->file('csv_file')->storeAs('files', 'teachers.csv');
+
+            $newTeachers = $this->csvToArray('C:\Users\Ela\Desktop\web4school - Backup\storage\app\files\teachers.csv');
+
+            if (end($newTeachers)[0] != "name" || end($newTeachers)[1] != "surname" || end($newTeachers)[2] != "email") {
+
+                return redirect()->back()->with('error', 'Enter csv file like the shown example!');
+            }
+
+            foreach ($newTeachers as $newTeacher) {
+                $newTeacher['password'] = '$2y$10$whSv4FOm0CWIh0MUHBOcjelYDZW6n3b6j625yBKKztOrrZ.4YzhO6';
+                $newTeacher['role_id'] = 2;
+                try {
+                    User::create($newTeacher);
+                } catch (\Exception $e) {
+                    continue;
+                }
+
+            }
+
+            return redirect()->route('teachers.index')->with('success', 'Data updated successfully');
+
         } else {
-            $profile = 'avatar.png';
+            return redirect()->back()->with('error', 'An error occurred. Please try again later! Enter valid csv file');
         }
-        $user->update([
-            'profile_picture' => $profile
-        ]);
-
-        $user->teacher()->create([
-            'gender'            => $request->gender,
-            'phone'             => $request->phone,
-            'dateofbirth'       => $request->dateofbirth,
-            'current_address'   => $request->current_address,
-            'permanent_address' => $request->permanent_address
-        ]);
-
-        $user->assignRole('Teacher');
-
-        return redirect()->route('teacher.index');
     }
 
 
@@ -138,5 +132,26 @@ class TeacherController extends Controller
         }
 
         return back();
+    }
+
+    private function csvToArray($filename = '', $delimiter = ',')
+    {
+        if (!file_exists($filename) || !is_readable($filename))
+            return false;
+
+        $header = null;
+        $data = array();
+        if (($handle = fopen($filename, 'r')) !== false) {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
+                if (!$header)
+                    $header = $row;
+                else
+                    $data[] = array_combine($header, $row);
+            }
+            $data[] = $header;
+            fclose($handle);
+        }
+
+        return $data;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
@@ -32,6 +33,12 @@ Route::post('change-password', [App\Http\Controllers\Auth\ChangePasswordControll
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('students',StudentController::class);
 Route::resource('teachers',TeacherController::class);
+
+Route::get('classes',[ClassController::class,'index'])->name('class.index');
+Route::get("classes/edit/{id}", [ClassController::class,"indexEdit"])->name('class.editClass');
+Route::post('classes/edit', [ClassController::class,"update"])->name("class.update");
+Route::get('classes/new-students/{id}',[ClassController::class,'newStudents'])->name('class.addStudents');
+Route::post('classes/store',[ClassController::class,'store'])->name('class.store');
 
 Route::get('profile',function (){
     return view('profile.index');
