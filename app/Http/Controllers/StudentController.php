@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class StudentController extends Controller
@@ -49,7 +50,7 @@ class StudentController extends Controller
             }
 
             foreach ($newStudents as $newStudent) {
-                $newStudent['password'] = '$2y$10$whSv4FOm0CWIh0MUHBOcjelYDZW6n3b6j625yBKKztOrrZ.4YzhO6';
+                $newStudent['password'] = Hash::make('12345678');
                 $newStudent['role_id'] = 3;
                 try {
                     User::create($newStudent);

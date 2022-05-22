@@ -52,7 +52,7 @@ class TeacherController extends Controller
             }
 
             foreach ($newTeachers as $newTeacher) {
-                $newTeacher['password'] = '$2y$10$whSv4FOm0CWIh0MUHBOcjelYDZW6n3b6j625yBKKztOrrZ.4YzhO6';
+                $newTeacher['password'] = Hash::make('12345678');
                 $newTeacher['role_id'] = 2;
                 try {
                     User::create($newTeacher);
