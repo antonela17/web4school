@@ -74,3 +74,6 @@ Route::post("mail-with-attachment",[MailController::class, "sendAtttachment"])->
 Route::get('/subject',[\App\Http\Controllers\SubjectController::class,'index'])->name('student.subject');
 Route::get('classes/subject/{id}',[\App\Http\Controllers\SubjectController::class,'newSubjects'])->name('class.newSubject');
 Route::post('classes/subject',[\App\Http\Controllers\SubjectController::class,'store'])->name('subject.store');
+
+Route::get('/add-username',[UserController::class,'newUsername'])->name('username.addUsername');
+Route::post('add-username',[UserController::class,'addUsername'])->name('username.username');

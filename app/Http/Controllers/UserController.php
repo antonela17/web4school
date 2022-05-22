@@ -121,4 +121,17 @@ class UserController extends Controller
 
     }
 
+    public function newUsername(){
+        return view('addUsername');
+    }
+    public function addUsername(Request $request){
+
+        try{
+            User::find(auth()->user()->id)->update(['username'=> $request->username ]) ;
+            return redirect()->route('home');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error','An error occurred. Please try again later!');
+        }
+    }
+
 }
