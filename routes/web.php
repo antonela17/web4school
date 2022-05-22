@@ -70,8 +70,10 @@ Route::get('/contact',[ContactController::class,'create']);
 Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
 
 Route::get("mail-with-attachment",[MailController::class,'create']);
+
+//Logged as student
 Route::post("mail-with-attachment",[MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
-Route::get('/all-subjects',[\App\Http\Controllers\SubjectController::class,'index'])->name('student.allSubjects');
+Route::get('/all-subjects',[\App\Http\Controllers\Student\StudentController::class,'showSubject'])->name('student.allSubjects');
 Route::get('/all-subjects/{subject}',[\App\Http\Controllers\SubjectController::class,'getSubject'])->name('student.subject');
 Route::get('/all-subjects/{subject}/members',[UserController::class, 'members']);
 
@@ -86,4 +88,11 @@ Route::get('files/{id}',[\App\Http\Controllers\FileController::class,'showFiles'
 Route::get('files/',[\App\Http\Controllers\FileController::class,'index'])->name('file');
 Route::get('file/',[\App\Http\Controllers\FileController::class,'getDocument'])->name('getFile');
 
-
+//Logged in as teacher
+Route::get('/teacher/subjects',[\App\Http\Controllers\Teacher\TeacherController::class,'showSubject'])->name("teacher.subjects");
+Route::get("teacher/subjects/{subjectName}/{class}",[\App\Http\Controllers\Teacher\TeacherController::class,'viewClass'])->name('teacher.subject');
+Route::post('teachers/subjects/addFile',[\App\Http\Controllers\FileController::class,'addFile'])->name('teacher.addFile');
+Route::get("teacher/subjects/{subjectName}/{class}/members",[\App\Http\Controllers\Teacher\TeacherController::class,'members'])->name('teacher.members');
+Route::get("teacher/subjects/{subjectName}/{class}/grades",[\App\Http\Controllers\Teacher\TeacherController::class,'showGrades'])->name('teacher.grades');
+Route::get("teacher/subjects/{class}/add-grades",[\App\Http\Controllers\Teacher\TeacherController::class,'newGrade'])->name('teacher.newGrades');
+Route::post("teacher/grades",[\App\Http\Controllers\Teacher\TeacherController::class,''])->name('teacher.addGrades');

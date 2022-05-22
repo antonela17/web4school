@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
-    public function index()
-    {
-        $subjects = SubjectService::getSubjects();
-        return view('student.index')->with(compact('subjects'));
-    }
 
     public function getSubject($subjectName)
     {

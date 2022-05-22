@@ -11,8 +11,9 @@ class StudentController
 
     public function showSubject(){
         $class_id = Auth::user()->class_id;
-        $subjects = Subjects::query()->where('classId',$class_id);
-        return view('student.index')->with(compact($subjects));
+        $subjects = Subjects::query()->where('classId',$class_id)->paginate(10);
+
+        return view('student.index')->with(compact('subjects'));
     }
 
 }
