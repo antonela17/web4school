@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
+use App\Mail\SendMailWithAttachment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -34,12 +36,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('students',StudentController::class);
 Route::resource('teachers',TeacherController::class);
 
-Route::get('classes',[ClassController::class,'index'])->name('class.index');
-Route::get("classes/edit/{id}", [ClassController::class,"indexEdit"])->name('class.editClass');
-Route::post('classes/edit', [ClassController::class,"update"])->name("class.update");
-Route::get('classes/new-students/{id}',[ClassController::class,'newStudents'])->name('class.addStudents');
-Route::post('classes/store',[ClassController::class,'store'])->name('class.store');
-
 Route::get('profile',function (){
     return view('profile.index');
 })->name('profile');
@@ -65,3 +61,6 @@ Route::get("/test",function (){
 });
 Route::get('/contact',[ContactController::class,'create']);
 Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
+
+Route::get("mail-with-attachment",[MailController::class,'create']);
+Route::post("mail-with-attachment",[MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');

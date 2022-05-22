@@ -23,7 +23,7 @@ class ContactController extends Controller
 
         Mail::to("sytemadmin@gmail.com")->send(new Contact($data));
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Email sent successfully');;
 
     }
 }
