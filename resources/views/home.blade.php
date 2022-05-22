@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                
+
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
@@ -14,6 +14,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                        @if(session()->has('success'))
+                            <div class="md:flex md:items-center mb-4" style="justify-content: center"> <p class="text-green-500 text-xs italic">
+                                    {{ session('success') }}
+                                </p></div>
+                        @endif
 
                     {{ __('You are logged in!') }}
                 </div>

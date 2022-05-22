@@ -18,7 +18,7 @@ class FileController extends Controller
     public function getDocument(Request $request)
     {
 if ($request['filename']){
-        $filePath = $request['filename'];
+        $filePath ="classFiles/". $request['filename'];
 
         // file not found
         if( ! Storage::disk('local')->exists($filePath) ) {

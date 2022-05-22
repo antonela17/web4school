@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Subjects;
 use App\Models\User;
 use App\Services\ClassService;
 use App\Services\SubjectService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
@@ -15,6 +17,15 @@ class SubjectController extends Controller
     {
         $subjects = SubjectService::getSubjects();
         return view('student.index')->with(compact('subjects'));
+    }
+
+    public function getSubject($subjectName)
+    {
+        $subject = Subjects::query()->where('name', '=',$subjectName)
+            ->where('classId','=', Auth::user()->class_id)->first();
+        $files = File::query()->where('subject_id', $subject->id)->get()->toArray();
+
+        return view('student.subject')->with(compact('files'));
     }
 
     public function store(Request $request)

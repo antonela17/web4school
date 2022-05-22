@@ -71,9 +71,19 @@ Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
 
 Route::get("mail-with-attachment",[MailController::class,'create']);
 Route::post("mail-with-attachment",[MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
-Route::get('/subject',[\App\Http\Controllers\SubjectController::class,'index'])->name('student.subject');
+Route::get('/all-subjects',[\App\Http\Controllers\SubjectController::class,'index'])->name('student.allSubjects');
+Route::get('/all-subjects/{subject}',[\App\Http\Controllers\SubjectController::class,'getSubject'])->name('student.subject');
+Route::get('/all-subjects/{subject}/members',[UserController::class, 'members']);
+
 Route::get('classes/subject/{id}',[\App\Http\Controllers\SubjectController::class,'newSubjects'])->name('class.newSubject');
 Route::post('classes/subject',[\App\Http\Controllers\SubjectController::class,'store'])->name('subject.store');
 
 Route::get('/add-username',[UserController::class,'newUsername'])->name('username.addUsername');
 Route::post('add-username',[UserController::class,'addUsername'])->name('username.username');
+
+
+Route::get('files/{id}',[\App\Http\Controllers\FileController::class,'showFiles'])->name('file.index');
+Route::get('files/',[\App\Http\Controllers\FileController::class,'index'])->name('file');
+Route::get('file/',[\App\Http\Controllers\FileController::class,'getDocument'])->name('getFile');
+
+

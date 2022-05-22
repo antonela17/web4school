@@ -133,5 +133,9 @@ class UserController extends Controller
             return redirect()->back()->with('error','An error occurred. Please try again later!');
         }
     }
+    public function members(){
+        $students = User::query()->where('class_id',Auth::user()->class_id)->paginate(10);
+        return view('student.members')->with(compact('students'));
+    }
 
 }

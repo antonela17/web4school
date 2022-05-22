@@ -25,13 +25,13 @@
             </a>
         @elseif(Auth::user()->role_id==3)
 
-@if((URL::current() == route('student.subject')))
+@if((URL::current() == route('student.allSubjects')))
                 <a href="{{--{{ route('subject.index') }}--}}" class="flex items-center text-gray-600 py-2 hover:text-blue-700">
                     <svg class="h-4 w-4 fill-current" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="align-right" class="svg-inline--fa fa-align-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M160 84V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16v40c0 8.837-7.163 16-16 16H176c-8.837 0-16-7.163-16-16zM16 228h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 256h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm160-128h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H176c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
                     <span class="ml-2 text-sm font-semibold">View Members</span>
                 </a>
             @else
-        <a href="{{ route('student.subject') }}" class="flex items-center text-gray-600 py-2 hover:text-blue-700">
+        <a href="{{ route('student.allSubjects') }}" class="flex items-center text-gray-600 py-2 hover:text-blue-700">
             <svg class="h-4 w-4 fill-current" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="align-right" class="svg-inline--fa fa-align-right fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M160 84V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16v40c0 8.837-7.163 16-16 16H176c-8.837 0-16-7.163-16-16zM16 228h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 256h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm160-128h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H176c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
             <span class="ml-2 text-sm font-semibold">Subjects</span>
         </a>
@@ -39,9 +39,15 @@
 
 
             <div class="dropdown">
-                <button onclick="show_hide()" class="button flex items-center text-gray-600 py-2 hover:text-blue-700">Vertetim</button>
+                <button onclick="show_hide()" class="button flex items-center text-gray-600 py-2 hover:text-blue-700">
+                    <img
+                        class="fill-current h-6 w-6 mr-2 feather feather-book-open svg-inline--fa fa-plus fa-w-14"
+                        src="{{asset('img/document/doc.svg')}}" alt="PDF"
+                        style="height: 30px;width: 25px"> Vertetim               <svg class="w-4 h-4 stroke-current text-black-200 ml-1 feather feather-chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+
                 <div id="list-items" style="display: none">
-                    <a href="/mail-with-attachment"><span class="ml-2 text-sm font-semibold  text-gray-600"> Vertetim studenti</span> </a>
+                    <a href="/mail-with-attachment"><span class="ml-2 text-sm font-semibold  text-gray-600"> Vertetim studenti</span> </a><br>
                     <a href="/mail-with-attachment"><span class="ml-2 text-sm font-semibold text-gray-600"> Vertetim notash </span></a>
                 </div>
             </div>
