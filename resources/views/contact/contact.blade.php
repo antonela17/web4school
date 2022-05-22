@@ -17,6 +17,7 @@
                 <input
                     class="shadow appearance-none border @error('name') border-red-500 @enderror rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     type="text" name="name" id="name"
+                    placeholder="Name Surname"
                     required="">
                 @error('name')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>

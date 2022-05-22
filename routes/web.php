@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
@@ -36,6 +37,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('students',StudentController::class);
 Route::resource('teachers',TeacherController::class);
 
+Route::get('classes',[ClassController::class,'index'])->name('class.index');
+Route::get("classes/edit/{id}", [ClassController::class,"indexEdit"])->name('class.editClass');
+Route::post('classes/edit', [ClassController::class,"update"])->name("class.update");
+Route::get('classes/new-students/{id}',[ClassController::class,'newStudents'])->name('class.addStudents');
+Route::post('classes/store',[ClassController::class,'store'])->name('class.store');
+
 Route::get('profile',function (){
     return view('profile.index');
 })->name('profile');
@@ -64,3 +71,6 @@ Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
 
 Route::get("mail-with-attachment",[MailController::class,'create']);
 Route::post("mail-with-attachment",[MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
+Route::get('/subject',[\App\Http\Controllers\SubjectController::class,'index'])->name('student.subject');
+Route::get('classes/subject/{id}',[\App\Http\Controllers\SubjectController::class,'newSubjects'])->name('class.newSubject');
+Route::post('classes/subject',[\App\Http\Controllers\SubjectController::class,'store'])->name('subject.store');

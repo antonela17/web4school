@@ -9,22 +9,22 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+
 </head>
 <body class="bg-gray-100 font-sans antialiased">
     <div id="app">
 
         @include('layouts.navbar')
-        
+
         <div class="main flex flex-wrap justify-end mt-16">
-            
+
             @include('layouts.sidebar')
 
             <div class="content w-full sm:w-5/6">
                 <div class="container mx-auto p-4 sm:p-6">
 
                     @yield('content')
-                    
+
                 </div>
             </div>
         </div>
@@ -39,6 +39,18 @@
             })
         })
     </script>
+    <script>
+        //show and hide dropdown list item on button click
+        function show_hide() {
+            var click = document.getElementById("list-items");
+            if(click.style.display ==="none") {
+                click.style.display ="block";
+            } else {
+                click.style.display ="none";
+            }
+        }
+    </script>
+
 
     @stack('scripts')
 
