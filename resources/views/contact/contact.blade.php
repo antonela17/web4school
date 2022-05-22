@@ -6,6 +6,11 @@
         <div class="">Contact Us</div>
         <div>
             <br><br>
+            @if(session()->has('success'))
+                <div class="md:flex md:items-center mb-4" style="justify-content: center"> <p class="text-green-500 text-xs italic">
+                        {{ session('success') }}
+                    </p></div>
+            @endif
         </div>
 
         <form method="POST" action="{{ route('contact.send') }}" class="bg-white shadow rounded px-8 pt-6 pb-8 mb-4">
