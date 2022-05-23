@@ -69,7 +69,7 @@ Route::get("/test",function (){
 Route::get('/contact',[ContactController::class,'create']);
 Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
 
-Route::get("mail-with-attachment",[MailController::class,'create']);
+Route::get("mail-with-attachment",[MailController::class,'create'])->name('email.paypal');
 
 //Logged as student
 Route::post("mail-with-attachment",[MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
@@ -96,3 +96,10 @@ Route::get("teacher/subjects/{subjectName}/{class}/members",[\App\Http\Controlle
 Route::get("teacher/subjects/{subjectName}/{class}/grades",[\App\Http\Controllers\Teacher\TeacherController::class,'showGrades'])->name('teacher.grades');
 Route::get("teacher/subjects/{class}/add-grades",[\App\Http\Controllers\Teacher\TeacherController::class,'newGrade'])->name('teacher.newGrades');
 Route::post("teacher/grades",[\App\Http\Controllers\Teacher\TeacherController::class,''])->name('teacher.addGrades');
+
+
+Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => '\App\Http\Controllers\PayPalController@payWithPaypal'));
+Route::post('paypal', array('as' => 'paypal','uses' => '\App\Http\Controllers\PayPalController@postPaymentWithpaypal'));
+Route::get('paypal', array('as' => 'status','uses' => '\App\Http\Controllers\PayPalController@getPaymentStatus'));
+
+
