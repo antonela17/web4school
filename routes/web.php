@@ -90,12 +90,12 @@ Route::get('file/',[\App\Http\Controllers\FileController::class,'getDocument'])-
 
 //Logged in as teacher
 Route::get('/teacher/subjects',[\App\Http\Controllers\Teacher\TeacherController::class,'showSubject'])->name("teacher.subjects");
+Route::get("teacher/subjects/{class}/add-grades",[\App\Http\Controllers\Teacher\TeacherController::class,'newGrade'])->name('teacher.newGrades');
 Route::get("teacher/subjects/{subjectName}/{class}",[\App\Http\Controllers\Teacher\TeacherController::class,'viewClass'])->name('teacher.subject');
-Route::post('teachers/subjects/addFile',[\App\Http\Controllers\FileController::class,'addFile'])->name('teacher.addFile');
+Route::post('teachers/subjects/addGrades',[\App\Http\Controllers\FileController::class,'addFile'])->name('teacher.addFile');
 Route::get("teacher/subjects/{subjectName}/{class}/members",[\App\Http\Controllers\Teacher\TeacherController::class,'members'])->name('teacher.members');
 Route::get("teacher/subjects/{subjectName}/{class}/grades",[\App\Http\Controllers\Teacher\TeacherController::class,'showGrades'])->name('teacher.grades');
-Route::get("teacher/subjects/{class}/add-grades",[\App\Http\Controllers\Teacher\TeacherController::class,'newGrade'])->name('teacher.newGrades');
-Route::post("teacher/grades",[\App\Http\Controllers\Teacher\TeacherController::class,''])->name('teacher.addGrades');
+Route::post("teacher/grades",[\App\Http\Controllers\Teacher\TeacherController::class,'addGrades'])->name('teacher.addGrades');
 
 
 Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => '\App\Http\Controllers\PayPalController@payWithPaypal'));

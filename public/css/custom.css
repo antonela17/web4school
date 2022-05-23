@@ -1,0 +1,77 @@
+body{
+
+    margin: 0;
+
+    background-color: bisque;
+
+}
+
+.index {
+
+    border: 17px solid #0080009c;
+
+    width: auto;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: -webkit-fill-available;
+
+}
+
+
+
+.index .top img{
+
+    justify-content: center;
+
+    width: 65px;
+
+    display: block;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+    margin-top: 61px;
+
+}
+
+.index .top h2{
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+}
+
+
+
+.index .bottom p{
+
+    font-size: 17px;
+
+    margin-top: 70px;
+
+    line-height: 28px;
+
+}
+
+
+
+.bottom{
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    margin-left: 60px;
+
+    margin-right: 60px;
+
+}

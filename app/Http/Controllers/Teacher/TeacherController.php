@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Models\Classes;
 use App\Models\File;
 use App\Models\Grade;
 use App\Models\Subjects;
@@ -71,8 +72,14 @@ class TeacherController
         return view('teacher.grades')->with(compact('grades','class'));
     }
 
-    public function newGrade($subjectId)
+    public function newGrade($class)
     {
+        $subjectId =Classes::query()
+            ->join('subject','class.id','=','subject.classId')
+            ->where('class.id','=',$class)
+            ->where('subject.mesues_id','=',Auth::user()->id)
+            ->get('subject.id')
+            ->toArray()[0]['id'];
 
         return view('teacher.newGrade')->with(compact('subjectId'));
     }
@@ -88,18 +95,18 @@ class TeacherController
 
             $request->file('csv_file')->storeAs('files', 'grades.csv');
 
-            $newTeachers = $this->csvToArray('C:\Users\Ela\Desktop\web4school - Backup\storage\app\files\grades.csv');
+            $newGrades = $this->csvToArray('C:\Users\Ela\Desktop\web4school - Backup\storage\app\files\grades.csv');
 
-            if (end($newTeachers)[0] != "number" || end($newTeachers)[1] != "userEmail") {
+            if (end($newGrades)[0] != "number" || end($newGrades)[1] != "userEmail") {
 
                 return redirect()->back()->with('error', 'Enter csv file like the shown example!');
             }
 
-            foreach ($newTeachers as $newTeacher) {
+            foreach ($newGrades as $newGrade) {
                 try {
                     $grades = [];
-                    $grades['number'] = $newTeacher['number'];
-                    $grades['user_id'] = User::query()->where('email', $newTeacher['userEmail']);
+                    $grades['number'] = $newGrade['number'];
+                    $grades['user_id'] = User::query()->where('email', $newGrade['userEmail'])->first()->id;
                     $grades['subjectId'] = $request->subject_id;
 
                     Grade::create($grades);
@@ -109,7 +116,7 @@ class TeacherController
 
             }
 
-            return redirect()->route('teacher.grades')->with('success', 'Grades added successfully');
+            return redirect()->route('home')->with('success', 'Grades added successfully');
 
         } else {
             return redirect()->back()->with('error', 'An error occurred. Please try again later! Enter valid csv file');

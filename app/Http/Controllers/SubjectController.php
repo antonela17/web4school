@@ -36,7 +36,7 @@ class SubjectController extends Controller
 
             $newSubjects = $this->csvToArray('C:\Users\Ela\Desktop\web4school - Backup\storage\app\files\subjects.csv');
 
-            if (end($newSubjects)[0] != "SubjectName" || end($newSubjects)[1] != "TeacherEmail") {
+            if (end($newSubjects)[0] != "SubjectName" || end($newSubjects)[1] != "TeacherEmail"||end($newSubjects)[2] != "Class") {
 
                 return redirect()->back()->with('error', 'Enter csv file like the shown example!');
             }
@@ -49,7 +49,7 @@ class SubjectController extends Controller
                     $subject = [
                         'name' => $newSubject['SubjectName'],
                         'mesues_id' => $teacher_id,
-                        'classId' => $request->class_id
+                        'classId' => $newSubject['Class']
                     ];
 
                     Subjects::create($subject);

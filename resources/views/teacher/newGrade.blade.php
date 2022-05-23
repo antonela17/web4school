@@ -27,7 +27,7 @@
 
         <div class="table w-full mt-8 bg-white rounded">
             <form action="{{ route('teacher.addGrades') }}" method="POST" class="w-full max-w-xl px-6 py-12" enctype=multipart/form-data>
-                <input name="subjet_id" type="hidden" value="{{$subjectId}}">
+                <input name="subject_id" type="hidden" value="{{$subjectId}}">
                 @csrf
                 <div class="md:flex md:items-center mb-6">
                     <img src="{{ asset('img/file/img.png' ) }}"  style="height: 220px;max-width:350px" alt="aaa">
