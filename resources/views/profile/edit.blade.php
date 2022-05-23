@@ -33,7 +33,9 @@
                             </label>
                         </div>
                         <div class="md:w-2/3">
-                            <input name="name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ auth()->user()->name }}">
+                            <input name="name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" pattern="([A-Z])[a-z]+"
+                                   title="Name must start with only one uppercase and shouldn't contain numbers"
+                                   minlength="4" maxlength="50" type="text" value="{{ auth()->user()->name }}">
                             @error('name')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                             @enderror
@@ -47,7 +49,10 @@
                                 </label>
                             </div>
                             <div class="md:w-2/3">
-                                <input name="surname" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ auth()->user()->surname }}">
+                                <input name="surname" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                       pattern="([A-Z])[a-z]+"
+                                       title="Surname must start with only one uppercase, shouldn't contain numbers and should have at least 4 characters"
+                                       minlength="4" maxlength="50"type="text" value="{{ auth()->user()->surname }}">
                                 @error('surname')
                                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                 @enderror
@@ -64,7 +69,10 @@
                             </label>
                         </div>
                         <div class="md:w-2/3">
-                            <input name="email" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="email" value="{{ auth()->user()->email }}">
+                            <input name="email" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                                   pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Email must contain leters one @ and at least one ."
+
+                                  type="email" value="{{ auth()->user()->email }}">
                             @error('email')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                             @enderror

@@ -20,9 +20,10 @@
                 </p></div>
         @endif
         <div class="table w-full mt-8 bg-white rounded">
-            <form action="{{--{{ route('teachers.update',$teacher->id) }}--}}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
+            <form action="{{ route('teachers.update',$teacher->id) }}" method="POST" class="w-full max-w-xl px-6 py-12" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
 
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3"></div>
@@ -37,8 +38,25 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" value="{{ $teacher->name }}">
+                        <input name="name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" pattern="([A-Z])[a-z]+"
+                               title="Name must start with only one uppercase and shouldn't contain numbers"
+                               minlength="4" maxlength="50"type="text" value="{{ $teacher->name }}">
                         @error('name')
+                        <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+                <div class="md:flex md:items-center mb-6">
+                    <div class="md:w-1/3">
+                        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
+                            Surname
+                        </label>
+                    </div>
+                    <div class="md:w-2/3">
+                        <input name="surname" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" pattern="([A-Z])[a-z]+"
+                               title="Surname must start with only one uppercase, shouldn't contain numbers and should have at least 4 characters"
+                               minlength="4" maxlength="50"type="text" value="{{ $teacher->surname }}">
+                        @error('surname')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
                     </div>
@@ -50,7 +68,8 @@
                         </label>
                     </div>
                     <div class="md:w-2/3">
-                        <input name="email" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="email" value="{{ $teacher->email }}">
+                        <input name="email" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                               pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Email must contain leters one @ and at least one ."type="email" value="{{ $teacher->email }}">
                         @error('email')
                         <p class="text-red-500 text-xs italic">{{ $message }}</p>
                         @enderror
@@ -72,7 +91,7 @@
                     <div class="md:w-1/3"></div>
                     <div class="md:w-2/3">
                         <button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                            Update Student
+                            Update Teacher
                         </button>
                     </div>
                 </div>

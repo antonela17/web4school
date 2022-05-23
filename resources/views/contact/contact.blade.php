@@ -3,7 +3,9 @@
 @section('content')
 
     <div class="w-full max-w-xs mx-auto">
-        <div class="">Contact Us</div>
+        <div>
+            <h2 class="text-gray-700 uppercase font-bold">Contact Us</h2>
+        </div>
         <div>
             <br><br>
             @if(session()->has('success'))
@@ -21,7 +23,9 @@
                 </label>
                 <input
                     class="shadow appearance-none border @error('name') border-red-500 @enderror rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    type="text" name="name" id="name"
+                    type="text" name="name" id="name" pattern="^([A-Z])[a-z]{2,}\s([A-Z])[a-z]{1,}"
+                    title="Name and Surname must start with only one uppercase,shouldn't contain numbers and should have at least 4 characters"
+                    minlength="4" maxlength="50"
                     placeholder="Name Surname"
                     required="">
                 @error('name')

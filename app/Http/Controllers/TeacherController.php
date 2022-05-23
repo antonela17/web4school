@@ -92,6 +92,7 @@ class TeacherController extends Controller
 
         $request->validate([
             'name'              => 'required|string|max:255',
+            'surname'           =>'required|string|max:255',
             'email'             => 'required|string|email|max:255|unique:users,email,'.$id,
         ]);
 
@@ -105,6 +106,7 @@ class TeacherController extends Controller
         try {
             $teacher->update([
                 'name'              => $request->name,
+                'surname'           => $request->surname,
                 'email'             => $request->email,
                 'profile_picture'   => $profile
             ]);
