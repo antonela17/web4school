@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <form action="{{ route('teachers.index') }}" method="GET" >
-        <input type="text" name="search" id="search" value="{{ old('search') }}"
+    <form>
+        <input type="text" name="search" id="search"
                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                required/>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" id="btn">Search Teacher</button>
@@ -88,6 +88,29 @@
             })
         })
     </script>
+
+    <script type="text/javascript">
+
+        function show() {
+            var name = document.getElementById('search').value;
+            objectData = {"search": name};
+
+            $.ajax(
+                {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('teachers.index') }}",
+                    type: "GET",
+                    data: objectData,
+                    error: function () {
+                        alert("Error!!!");
+                    }
+                })
+        }
+
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 @endpush
 

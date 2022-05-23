@@ -5,10 +5,12 @@
     </div>
 
     <div class="relative">
+        <div class="flex items-center cursor-pointer">
+
+            <p class="text-sm text-white font-semibold leading-none" style="padding-right: 20px"><a href="/contact">Contact us</a> </p>
         @auth
-            <div class="flex items-center cursor-pointer">
+
                 <p class="text-sm text-white font-semibold leading-none" style="padding-right: 20px"><a href="/home">Home</a> </p>
-                <p class="text-sm text-white font-semibold leading-none" style="padding-right: 20px"><a href="/contact">Contact us</a> </p>
 
             <div class="flex items-center cursor-pointer" id="opennavdropdown">
             <img class="w-8 h-8 rounded-full mr-2" src="{{ asset('img/profile/' . auth()->user()->profile_picture) }}" alt="Avatar">
@@ -34,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+
         @else
             <div class="flex items-center">
                 @if (Route::has('login'))
@@ -46,6 +48,7 @@
                     </div>
                 @endif
             </div>
+        </div>
         @endauth
     </div>
 </div>
