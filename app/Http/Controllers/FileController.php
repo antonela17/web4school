@@ -10,16 +10,6 @@ use Illuminate\Http\Response;
 
 class FileController extends Controller
 {
-    public function index()
-    {
-        return view('file.index');
-    }
-
-    public function showFiles($id)
-    {
-        $files = ['files/test.pdf', 'files/vertetimStudenti.pdf'];
-        return view('file.showFiles')->with(compact('files'));
-    }
 
     public function getDocument(Request $request)
     {

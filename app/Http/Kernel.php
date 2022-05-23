@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminsOnly;
+use App\Http\Middleware\StudentsOnly;
+use App\Http\Middleware\TeachersOnly;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,5 +67,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin_only'=>AdminsOnly::class,
+        'student_only'=>StudentsOnly::class,
+        'teacher_only'=>TeachersOnly::class,
     ];
 }
