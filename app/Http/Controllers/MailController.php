@@ -6,6 +6,7 @@ use App\Mail\Contact;
 use App\Mail\SendMailWithAttachment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
@@ -21,9 +22,10 @@ class MailController extends Controller
         $request->validate([
             'user_id' => 'required',
         ]);
+
         $user= User::query()
-            ->where('users.id','=','3')
-           ->join('class','class.id','=','users.id')->get(['users.name as emer','class.name','class.year'])->toArray()[0];
+            ->where('users.id','=',Auth::user()->id)
+           ->join('class','class.id','=','users.class_id')->get(['users.name as emer','class.name','class.year'])->toArray()[0];
 
         $data = ['name'=>$user['emer'],
             'class_name'=>$user['name'],
