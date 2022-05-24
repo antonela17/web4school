@@ -29,7 +29,7 @@
                 @if(count($grades))
                     @foreach($grades as $grade)
                         <li style="padding-bottom: 10px ">
-                          Grade {{$grade->number}}
+                            <a href="{{url()->current()}}/{{$grade->number}}" >Grade {{$grade->number}}</a>
                         </li>
 
                     @endforeach

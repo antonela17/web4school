@@ -77,6 +77,12 @@ Route::group(['middleware' => 'teacher_only'], function () {
     Route::get("teacher/subjects/{subjectName}/{class}/members", [\App\Http\Controllers\Teacher\TeacherController::class, 'members'])->name('teacher.members');
     Route::get("teacher/subjects/{subjectName}/{class}/grades", [\App\Http\Controllers\Teacher\TeacherController::class, 'showGrades'])->name('teacher.grades');
     Route::post("teacher/grades", [\App\Http\Controllers\Teacher\TeacherController::class, 'addGrades'])->name('teacher.addGrades');
+
+    Route::get("teacher/subjects/{subjectName}/{class}/grades/{id}",[\App\Http\Controllers\GradeController::class,'index'])->name('grade.index');
+    Route::get("teacher/subjects/{subjectName}/{class}/grades/{id}/edit/{userId}",[\App\Http\Controllers\GradeController::class,'showEditGrade'])->name('grade.edit');
+    Route::post("teacher/subjects/{subjectName}/{class}/grades/{id}/edit/{userId}",[\App\Http\Controllers\GradeController::class,'updateGrade'])->name('grade.update');
+
+
 });
 
 
