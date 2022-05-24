@@ -52,12 +52,16 @@ Route::group(['middleware' => 'admin_only'], function () {
 //Logged as student
 Route::group(['middleware' => 'student_only'], function () {
 
-    Route::get("mail-with-attachment", [MailController::class, 'create'])->name('email.paypal');
-    Route::post("mail-with-attachment", [MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
+    Route::get("vertetim-studenti", [MailController::class, 'createVS'])->name('email.vertetimStudenti');
+    Route::post("vertetim-studenti", [MailController::class, "sendVs"])->name('contact.sendVs');
     Route::get('/all-subjects', [\App\Http\Controllers\Student\StudentController::class, 'showSubject'])->name('student.allSubjects');
     Route::get('/all-subjects/classmates', [UserController::class, 'members'])->name('classmates');
     Route::get('/all-subjects/{subject}', [\App\Http\Controllers\SubjectController::class, 'getSubject'])->name('student.subject');
     Route::get('/all-subjects/{subject}/members', [\App\Http\Controllers\Student\StudentController::class, 'showSubjectMembers'])->name('members');
+
+    Route::get('/mail-with-attachment', [MailController::class, 'create'])->name('email.paypal');
+    Route::post("mail-with-attachment", [MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
+
 
     //Paypal
     Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => '\App\Http\Controllers\PayPalController@payWithPaypal'));
@@ -104,16 +108,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('add-username',[UserController::class,'addUsername'])->name('username.username');
 });
 
-
-Route::get('read',[UserController::class,'read'])->name('read')->middleware('admin_only');
-Route::get('create-user',[UserController::class,'createUserView'])->middleware('admin_only');
-Route::post('create',[UserController::class,'create'])->middleware('admin_only')->name('create');
-Route::get('edit',[UserController::class,'editUser'])->middleware('admin_only')->name('prove');
-Route::post('/edit',[UserController::class,'update'])->middleware('admin_only')->name('edit');
-Route::post('/delete',[UserController::class,'delete'])->middleware('admin_only')->name('delete');
-Route::get("/test",function (){
-    return view("contact.contact");
-});
 Route::get('/contact',[ContactController::class,'create']);
 Route::post("/contact",[ContactController::class,'send'])->name('contact.send');
 

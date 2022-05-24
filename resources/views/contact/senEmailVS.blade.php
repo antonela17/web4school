@@ -18,7 +18,7 @@
         </div>
 
 
-        <form method="POST" action="{{ route('contact.sendAtttachment') }}" class="bg-white shadow rounded px-8 pt-6 pb-8 mb-4">
+        <form method="POST" action="{{ route('contact.sendVs') }}" class="bg-white shadow rounded px-8 pt-6 pb-8 mb-4">
             @csrf
             <input id="user_id" type="hidden"
                    class="form-control" name="user_id"
@@ -28,7 +28,7 @@
                 <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="submit">
-                    Merr vertetim notash
+                    Merr vertetim studenti
 
                 </button>
             </div>

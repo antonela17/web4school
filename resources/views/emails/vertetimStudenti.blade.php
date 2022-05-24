@@ -89,7 +89,7 @@
 
     <div class="bottom">
 
-        <p> Vertetohet se <b>Z. Znj {!! $name !!}</b> eshte student/e e kesaj shkolle ne klasen {!! $class_name !!}, viti  {!!$class_year  !!} i rregullt, sistemi me
+        <p> Vertetohet se <b>Z. Znj {!! $name !!} {!! $surname !!}</b> eshte student/e e kesaj shkolle ne klasen {!! $class_name !!}, viti  {!!$class_year  !!} i rregullt, sistemi me
 
             kohe te plote per vitin akademik 2021-2022.<br> <span> I leshohet ky vertetim sipas kerkeses se te interesuarit/es.</span> <br> _____________________________________
 

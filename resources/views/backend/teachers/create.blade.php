@@ -28,8 +28,8 @@
         <div class="table w-full mt-8 bg-white rounded">
             <form action="{{ route('teachers.store') }}" method="POST" class="w-full max-w-xl px-6 py-12" enctype=multipart/form-data>
                 @csrf
-                <div class="md:flex md:items-center mb-6">
-                    <img src="{{ asset('img/file/img.png' ) }}"  style="height: 220px;max-width:350px" alt="aaa">
+                <div class="md:flex md:items-center mb-6 text-red-600">
+                    <p>Note! Csv File must be in this format: name,surname,email!</p>
                 </div>
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3">

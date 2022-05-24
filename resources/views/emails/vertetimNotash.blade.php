@@ -76,41 +76,29 @@
     </div>
     <div class="bottom">
         <h3>VERTETIM</h3>
-        <p> Vertetohet se <b>{!! $name !!}</b>, vazhdon Ciklin e Pare te Studimeve "Bachelor< ne "Informatike/ , sistemi me kohe
-            te plote , viti i lll-te i rregullt per vitin akademik 2021-2022 ne baze te Regjistrimit themeltar
+        <p> Vertetohet se <b>{!! $user['name'] !!} {!! $user['surname'] !!}</b>, vazhdon mesimet ne shkollen "Web4School" , sistemi me kohe
+            te plote. Ne baze te Regjistrimit themeltar
             te notave te Deges Mesimore te Fakultetit te Shkencave te Natyres, rezulton se ka shlyer keto detyrime me vleresimet perkatese:
         </p>
     </div>
     <div class="row">
-        <div class="column" >
-            <h3>NR</h3>
-            <p>1</p>
-            <p>2</p>
-            <p>3</p>
-            <p>4</p>
-            <p>5</p>
 
-        </div>
-        <div class="column" >
-            <h3>LENDA</h3>
-            <p>Fizike</p>
-            <p>Matematike</p>
-            <p>Algjeber</p>
-            <p>Gjeografi</p>
-            <p>Histori</p>
+        <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
+            <tr>
+                <th>Nr</th>
+                <th>Lenda</th>
+                <th>Nota</th>
+            </tr>
 
+            @foreach($grades as $grade)
+                <tr id="row2">
+                    <td>{{ $loop->index + 1 }}</td>
+                    <td>{{$grade['name']}}</td>
+                    <td>{{$grade['grade']}}</td>
+                </tr>
+            @endforeach
 
-        </div>
-        <div class="column">
-            <h3>NOTAT</h3>
-            <p>9</p>
-            <p>6</p>
-            <p>8</p>
-            <p>10</p>
-            <p>7</p>
-
-        </div>
-{{--        <p style=" font-weight:bold; right:0 !important;">Mesatarja : 8.9</p>--}}
+        </table>
 
     </div>
 </div>

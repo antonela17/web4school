@@ -36,6 +36,9 @@
         <div class="table w-full mt-8 bg-white rounded">
             <form action="{{ route('subject.store') }}" method="POST" class="w-full max-w-xl px-6 py-12"
                   enctype=multipart/form-data>
+                <div class="md:flex md:items-center mb-6 text-red-600">
+                    <p>Note! Csv File must be in this format: SubjectName,TeacherEmail,Class!</p>
+                </div>
                 @csrf
                 <input id="class_id" type="hidden"
                        class="form-control" name="class_id"

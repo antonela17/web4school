@@ -46,7 +46,7 @@
                 </button>
 
                 <div id="list-items" style="display: none">
-                    <a href="/mail-with-attachment"><span class="ml-2 text-sm font-semibold  text-gray-600"> Vertetim studenti</span> </a><br>
+                    <a href="/vertetim-studenti"><span class="ml-2 text-sm font-semibold  text-gray-600"> Vertetim studenti</span> </a><br>
                     <a href="/paywithpaypal"><span class="ml-2 text-sm font-semibold text-gray-600"> Vertetim notash </span></a>
                 </div>
             </div>

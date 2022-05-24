@@ -30,7 +30,9 @@
                 <input name="subject_id" type="hidden" value="{{$subjectId}}">
                 @csrf
                 <div class="md:flex md:items-center mb-6">
-                    <img src="{{ asset('img/file/img.png' ) }}"  style="height: 220px;max-width:350px" alt="aaa">
+                    <div class="md:flex md:items-center mb-6 text-red-600">
+                        <p>Note! Csv File must be in this format: number,userEmail!</p>
+                    </div>
                 </div>
                 <div class="md:flex md:items-center mb-6">
                     <div class="md:w-1/3">
