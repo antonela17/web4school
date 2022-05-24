@@ -2,12 +2,6 @@
 
 @section('content')
 
-    <form action="{{ route('class.index') }}" method="GET" >
-        <input type="text" name="search" id="search" value="{{ old('search') }}"
-               class="shadow appearance-none border rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-               required/>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" id="btn">Search Student</button>
-    </form>
     <div class="roles-permissions">
         @if(session()->has('success'))
             <div class="md:flex md:items-center mb-4" style="justify-content: center"> <p class="text-green-500 text-xs italic">

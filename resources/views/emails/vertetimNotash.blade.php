@@ -76,7 +76,7 @@
     </div>
     <div class="bottom">
         <h3>VERTETIM</h3>
-        <p> Vertetohet se <b>Z. Znj Aida Kolaj</b>, vazhdon Ciklin e Pare te Studimeve "Bachelor< ne "Informatike/ , sistemi me kohe
+        <p> Vertetohet se <b>{!! $name !!}</b>, vazhdon Ciklin e Pare te Studimeve "Bachelor< ne "Informatike/ , sistemi me kohe
             te plote , viti i lll-te i rregullt per vitin akademik 2021-2022 ne baze te Regjistrimit themeltar
             te notave te Deges Mesimore te Fakultetit te Shkencave te Natyres, rezulton se ka shlyer keto detyrime me vleresimet perkatese:
         </p>
@@ -110,7 +110,7 @@
             <p>7</p>
 
         </div>
-        <p style=" font-weight:bold; right:0 !important;">Mesatarja : 8.9</p>
+{{--        <p style=" font-weight:bold; right:0 !important;">Mesatarja : 8.9</p>--}}
 
     </div>
 </div>

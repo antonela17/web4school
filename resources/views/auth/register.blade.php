@@ -58,7 +58,7 @@
                 <input
                     class="shadow appearance-none border @error('email') border-red-500 @enderror rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     type="email" name="email" id="emailaddress"
-                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Email must contain leters one @ and at least one ."
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Email must contain letters, one @ and at least one ."
                     placeholder="email@example.com">
                 @error('email')
                 <p class="text-red-500 text-xs italic">{{ $message }}</p>
