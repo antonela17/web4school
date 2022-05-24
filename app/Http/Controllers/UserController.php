@@ -133,8 +133,16 @@ class UserController extends Controller
             return redirect()->back()->with('error','An error occurred. Please try again later!');
         }
     }
-    public function members(){
-        $students = User::query()->where('class_id',Auth::user()->class_id)->paginate(10);
+    public function members(Request $request){
+        if ($request->input('search')) {
+            $search = $request->input('search');
+            $students = User::query()
+               -> where('class_id', Auth::user()->class_id)
+                ->where([['name', 'LIKE', '%' . $search . '%']])
+                ->paginate(10);
+        } else {
+            $students = User::query()->where('class_id', Auth::user()->class_id)->paginate(7);
+        }
         return view('student.members')->with(compact('students'));
     }
 

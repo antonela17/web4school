@@ -21,6 +21,8 @@ class ClassController extends Controller
     public function update(Request $request){
         $request->validate([
             'class_id'=>'required',
+            'year' =>'required|max:2',
+            'name'=> 'required|max:1'
 
         ]);
         $id = $request->input('class_id');

@@ -29,7 +29,7 @@
                 @if(count($grades))
                     @foreach($grades as $grade)
                         <li style="padding-bottom: 10px ">
-                          Grade {{$grade}}
+                          Grade {{$grade->number}}
                         </li>
 
                     @endforeach

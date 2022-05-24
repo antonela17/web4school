@@ -5,38 +5,36 @@
     </div>
 
     <div class="relative">
-        <div class="flex items-center cursor-pointer">
-
-            <p class="text-sm text-white font-semibold leading-none" style="padding-right: 20px"><a href="/contact">Contact us</a> </p>
         @auth
-
+            <div class="flex items-center cursor-pointer">
                 <p class="text-sm text-white font-semibold leading-none" style="padding-right: 20px"><a href="/home">Home</a> </p>
+                <p class="text-sm text-white font-semibold leading-none" style="padding-right: 20px"><a href="/contact">Contact us</a> </p>
 
-            <div class="flex items-center cursor-pointer" id="opennavdropdown">
-            <img class="w-8 h-8 rounded-full mr-2" src="{{ asset('img/profile/' . auth()->user()->profile_picture) }}" alt="Avatar">
-                <p class="text-sm text-white font-semibold leading-none">{{ auth()->user()->name }}</p>
-                <svg class="w-4 h-4 stroke-current text-gray-200 ml-1 feather feather-chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </div>
-            <div class="bg-blue-700 absolute top-0 right-0 mt-12 -mr-6 shadow rounded-bl rounded-br">
-                <div class="hidden h-24 w-48" id="navdropdown">
-                    <div class="px-8 py-4 border-t border-blue-800">
-                     <a href="{{ route('profile') }}" class="flex items-center pb-3 text-sm text-gray-200 font-semibold">
-                            <svg class="h-4 w-4 mr-2 fill-current text-gray-200 svg-inline--fa fa-user-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path></svg>
-                            <span>Profile</span>
-                    </a>
+                <div class="flex items-center cursor-pointer" id="opennavdropdown">
+                    <img class="w-8 h-8 rounded-full mr-2" src="{{ asset('img/profile/' . auth()->user()->profile_picture) }}" alt="Avatar">
+                    <p class="text-sm text-white font-semibold leading-none">{{ auth()->user()->name }}</p>
+                    <svg class="w-4 h-4 stroke-current text-gray-200 ml-1 feather feather-chevron-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="bg-blue-700 absolute top-0 right-0 mt-12 -mr-6 shadow rounded-bl rounded-br">
+                    <div class="hidden h-24 w-48" id="navdropdown">
+                        <div class="px-8 py-4 border-t border-blue-800">
+                            <a href="{{ route('profile') }}" class="flex items-center pb-3 text-sm text-gray-200 font-semibold">
+                                <svg class="h-4 w-4 mr-2 fill-current text-gray-200 svg-inline--fa fa-user-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z"></path></svg>
+                                <span>Profile</span>
+                            </a>
 
 
-                     <form action="{{ route('logout') }}" method="POST" class="pb-2">
-                            @csrf
-                            <button class="flex items-center text-sm text-gray-200 font-semibold focus:outline-none" type="submit">
-                                <svg class="h-4 w-4 mr-2 fill-current text-gray-200 svg-inline--fa fa-sign-out-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>
-                                <span>{{ __('Logout') }}</span>
-                            </button>
-                        </form>
+                            <form action="{{ route('logout') }}" method="POST" class="pb-2">
+                                @csrf
+                                <button class="flex items-center text-sm text-gray-200 font-semibold focus:outline-none" type="submit">
+                                    <svg class="h-4 w-4 mr-2 fill-current text-gray-200 svg-inline--fa fa-sign-out-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>
+                                    <span>{{ __('Logout') }}</span>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-
         @else
             <div class="flex items-center">
                 @if (Route::has('login'))
@@ -48,7 +46,6 @@
                     </div>
                 @endif
             </div>
-        </div>
         @endauth
     </div>
 </div>

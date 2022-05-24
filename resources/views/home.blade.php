@@ -6,8 +6,6 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -20,7 +18,17 @@
                                 </p></div>
                         @endif
 
-                    {{ __('You are logged in!') }}
+                        @if(Auth::user()->role_id==1)
+                            @include('dashboard.admin')
+                        @endif
+
+                        @if(Auth::user()->role_id==2)
+                            @include('dashboard.teacher')
+                        @endif
+
+                        @if(Auth::user()->role_id==3)
+                            @include('dashboard.student')
+                        @endif
                 </div>
             </div>
         </div>

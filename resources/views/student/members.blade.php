@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <form action="{{--{{ route('students.index') }}--}}" method="GET" >
-        <input type="text" name="search" id="search" value="{{ old('search') }}"
+    <form>
+        <input type="text" name="search" id="search"
                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                required/>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" id="btn">Search Student</button>
@@ -30,28 +30,48 @@
     </div>
     <div class="mt-8 bg-white rounded border-b-4 border-gray-300">
         <div class="flex flex-wrap items-center uppercase text-sm font-semibold bg-gray-300 text-gray-600 rounded-tl rounded-tr">
-            <div class="w-3/12 px-4 py-3">Name</div>
+            <div class="w-2/12 px-4 py-3">Name</div>
             <div class="w-2/12 px-4 py-3">Surname</div>
             <div class="w-2/12 px-4 py-3">Username</div>
             <div class="w-3/12 px-4 py-3">Email</div>
+            <div class="w-3/12 px-4 py-3">Profile Picture</div>
         </div>
         @foreach ($students as $student)
             <div class="flex flex-wrap items-center text-gray-700 border-t-2 border-l-4 border-r-4 border-gray-300">
-                <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->name }}</div>
+                <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->name }}</div>
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->surname }}</div>
                 <div class="w-2/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->username }}</div>
                 <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight">{{ $student->email }}</div>
-                <div class="w-2/12 flex items-center justify-end px-3">
+                <div class="w-3/12 px-4 py-3 text-sm font-semibold text-gray-600 tracking-tight"><img style="width: 40px;height: 40px" src="{{ asset('img/profile/'.$student->profile_picture) }}" alt="{{$student->profile_picture}}"></div>
 
-                </div>
             </div>
         @endforeach
     </div>
     <div class="mt-8">
-{{--        {{ $students->links() }}--}}
+        {{ $students->links() }}
     </div>
-
-{{--    @include('backend.alert.delete',['name' => 'student'])--}}
     </div>
 @endsection
+<script type="text/javascript">
+
+    function show() {
+        var name = document.getElementById('search').value;
+        objectData = {"search": name};
+
+        $.ajax(
+            {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('students.index') }}",
+                type: "GET",
+                data: objectData,
+                error: function () {
+                    alert("Error!!!");
+                }
+            })
+    }
+
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 

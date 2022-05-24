@@ -55,8 +55,9 @@ Route::group(['middleware' => 'student_only'], function () {
     Route::get("mail-with-attachment", [MailController::class, 'create'])->name('email.paypal');
     Route::post("mail-with-attachment", [MailController::class, "sendAtttachment"])->name('contact.sendAtttachment');
     Route::get('/all-subjects', [\App\Http\Controllers\Student\StudentController::class, 'showSubject'])->name('student.allSubjects');
+    Route::get('/all-subjects/classmates', [UserController::class, 'members'])->name('classmates');
     Route::get('/all-subjects/{subject}', [\App\Http\Controllers\SubjectController::class, 'getSubject'])->name('student.subject');
-    Route::get('/all-subjects/{subject}/members', [UserController::class, 'members']);
+    Route::get('/all-subjects/{subject}/members', [\App\Http\Controllers\Student\StudentController::class, 'showSubjectMembers'])->name('members');
 
     //Paypal
     Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => '\App\Http\Controllers\PayPalController@payWithPaypal'));

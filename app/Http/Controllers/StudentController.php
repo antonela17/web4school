@@ -44,7 +44,7 @@ class StudentController extends Controller
 
             $newStudents = $this->csvToArray('C:\Users\Ela\Desktop\web4school - Backup\storage\app\files\students.csv');
 
-            if (end($newStudents)[0] != "name" || end($newStudents)[1] != "surname" || end($newStudents)[2] != "email"||end($newStudents)[3] != "Class") {
+            if (end($newStudents)[0] != "name" || end($newStudents)[1] != "surname" || end($newStudents)[2] != "email"||end($newStudents)[3] != "class_id") {
 
                 return redirect()->back()->with('error', 'Enter csv file like the shown example!');
             }

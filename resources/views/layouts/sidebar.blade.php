@@ -25,17 +25,16 @@
             </a>
         @elseif(Auth::user()->role_id==3)
 
-@if((URL::current() == route('student.allSubjects')))
-                <a href="{{--{{ route('subject.index') }}--}}" class="flex items-center text-gray-600 py-2 hover:text-blue-700">
+                <a href="{{ route('classmates') }}" class="flex items-center text-gray-600 py-2 hover:text-blue-700">
                     <svg class="h-4 w-4 fill-current svg-inline--fa fa-align-right fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="align-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M160 84V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16v40c0 8.837-7.163 16-16 16H176c-8.837 0-16-7.163-16-16zM16 228h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 256h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm160-128h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H176c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
-                    <span class="ml-2 text-sm font-semibold">View Members</span>
+                    <span class="ml-2 text-sm font-semibold">View Class Mates</span>
                 </a>
-            @else
+
         <a href="{{ route('student.allSubjects') }}" class="flex items-center text-gray-600 py-2 hover:text-blue-700">
             <svg class="h-4 w-4 fill-current svg-inline--fa fa-align-right fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="align-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M160 84V44c0-8.837 7.163-16 16-16h256c8.837 0 16 7.163 16 16v40c0 8.837-7.163 16-16 16H176c-8.837 0-16-7.163-16-16zM16 228h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 256h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm160-128h256c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H176c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg>
             <span class="ml-2 text-sm font-semibold">Subjects</span>
         </a>
-            @endif
+
 
 
             <div class="dropdown">
